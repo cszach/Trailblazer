@@ -57,6 +57,8 @@ public class App {
             System.exit(Exceptions.INVALID_COMMAND_LINE_ARGUMENTS);
           }
 
+          break;
+
         case "--debug":
           debugging = true;
 
@@ -81,27 +83,31 @@ public class App {
       } else {
         System.out.println("Going from " + startIntersectionId + " to " + endIntersectionId);
 
+        double totalMiles = 0.0;
+
         for (Road road : shortestPath) {
           Intersection nextIntersection = road.getTheOtherEnd(currentIntersection);
           System.out.println(nextIntersection.getId());
+          totalMiles += road.getDistance();
           currentIntersection = nextIntersection;
         }
+
+        System.out.println("Total miles travelled: " + totalMiles);
       }
     }
 
     // Display GUI if --show is present
 
     if (show) {
-      AppWindow window = new AppWindow(1200, 800);
+      AppWindow window = new AppWindow("Street Mapping", 1280, 800);
       Map map = new Map(geo, new WebMercatorProjection(window.getWidth(), window.getHeight(), 0));
 
       window.add(map);
+      window.display();
 
       map.setDebugging(debugging);
       map.project();
       map.adjust();
-
-      window.display();
     }
   }
 }
