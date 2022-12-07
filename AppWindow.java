@@ -8,8 +8,8 @@ public class AppWindow extends JFrame {
    * @param width the (initial) width of the frame.
    * @param width the (initial) height of the frame.
    */
-  public AppWindow(int width, int height) {
-    super();
+  public AppWindow(String title, int width, int height) {
+    super(title);
 
     this.setSize(width, height);
   }
@@ -17,6 +17,7 @@ public class AppWindow extends JFrame {
   /** Makes the window frame visible. */
   public void display() {
     this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    this.setLocationRelativeTo(null);
     this.setVisible(true);
   }
 }
