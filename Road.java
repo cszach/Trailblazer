@@ -35,7 +35,8 @@ public class Road {
         Math.pow(Math.sin(dLat / 2), 2)
             + Math.pow(Math.sin(dLong / 2), 2) * Math.cos(lat1) * Math.cos(lat2);
     double c = 2 * Math.asin(Math.sqrt(a));
-    return RADIUS * c;
+    double d = RADIUS * c;
+    return d * 0.62; // convert to miles
   }
 
   @Override
