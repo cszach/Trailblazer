@@ -189,15 +189,14 @@ public class Geography {
             });
 
     Collection<Intersection> intersections = this.intersections.values();
-    intersections.remove(startIntersection);
 
     for (Intersection intersection : intersections) {
       intersection.setDistance(Double.MAX_VALUE);
       intersection.setPrev(null);
-      // q.add(intersection);
     }
 
     startIntersection.setDistance(0);
+    startIntersection.setPrev(null);
     q.add(startIntersection);
 
     while (!q.isEmpty()) {
@@ -213,7 +212,6 @@ public class Geography {
         double temp = min.getDistance() + neighborRoad.getDistance();
 
         if (temp < neighborIntersection.getDistance()) {
-          // q.remove(neighborIntersection);
           neighborIntersection.setDistance(temp);
           neighborIntersection.setPrev(neighborRoad);
 
