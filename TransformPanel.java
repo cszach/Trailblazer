@@ -19,6 +19,9 @@ public class TransformPanel extends JPanel implements MouseListener, MouseMotion
   private int prevMouseY;
   private boolean isRotating = false;
 
+  // For mouse scrolls
+  private int totalUnitsScrolled = 0;
+
   public TransformPanel() {
     super();
 
@@ -48,6 +51,13 @@ public class TransformPanel extends JPanel implements MouseListener, MouseMotion
 
   public void setTransform(AffineTransform transform) {
     this.transform = transform;
+  }
+
+  public void center() {
+    // First, make sure translations are set to 0
+    this.transform.translate(-this.transform.getTranslateX(), -this.transform.getTranslateY());
+    // Then center
+    this.transform.translate(-this.focus.getX() + (this.getWidth() - this.focus.getWidth() * this.transform.getScaleX()) / 2.0, -this.focus.getY() + (this.getHeight() - this.focus.getHeight() * this.transform.getScaleY()) / 2.0);
   }
 
   @Override
@@ -100,15 +110,18 @@ public class TransformPanel extends JPanel implements MouseListener, MouseMotion
 
   @Override
   public void mouseWheelMoved(MouseWheelEvent e) {
-    double scaleAmount = 1.0 + (e.getUnitsToScroll() / -100.0);
-    double currentTranslateX = this.transform.getTranslateX();
-    double currentTranslateY = this.transform.getTranslateY();
+    int unitsToScroll = e.getUnitsToScroll();
 
-    System.out.println(scaleAmount);
+    double currentScaleX = this.transform.getScaleX();
+    double currentScaleY = this.transform.getScaleY();
 
-    this.transform.translate(-currentTranslateX, -currentTranslateY);
-    this.transform.scale(scaleAmount, scaleAmount);
-    this.transform.translate(currentTranslateX + (this.focus.getWidth() * scaleAmount) / 2.0, currentTranslateY + (this.focus.getHeight() * scaleAmount) / 2.0);
+    this.totalUnitsScrolled += unitsToScroll;
+
+    double newScaleX = 1.0 + this.totalUnitsScrolled / -10.0;
+    double newScaleY = 1.0 + this.totalUnitsScrolled / -10.0;
+
+    // this.transform.translate(this.focus.getWidth() / -2.0, this.focus.getHeight() / -2.0);
+    // this.transform.translate(scaleCenterX, scaleCenterX);
 
     this.repaint();
   }
