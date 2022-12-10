@@ -64,7 +64,7 @@ public class Map extends TransformPanel {
     this.boundingBox = new Rectangle(boxX, boxY, boxWidth, boxHeight);
   }
 
-  public void adjust() {
+  public void resetView() {
     computeBoundingBox();
 
     while (this.boundingBox.getWidth() < 12.0) {

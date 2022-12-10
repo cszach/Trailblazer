@@ -107,7 +107,7 @@ public class App {
 
       map.setDebugging(debugging);
       map.project();
-      map.adjust();
+      map.resetView();
     }
   }
 }
