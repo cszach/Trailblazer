@@ -26,13 +26,13 @@ public class App {
       geo.importFromFile(args[0]);
     } catch (ArrayIndexOutOfBoundsException exception) {
       System.err.println("Invalid command line arguments");
-      System.exit(Exceptions.INVALID_COMMAND_LINE_ARGUMENTS);
+      System.exit(ExitCodes.INVALID_COMMAND_LINE_ARGUMENTS);
     } catch (FileNotFoundException exception) {
       exception.printStackTrace();
-      System.exit(Exceptions.FILE_NOT_FOUND);
+      System.exit(ExitCodes.FILE_NOT_FOUND);
     } catch (NoSuchElementException exception) {
       exception.printStackTrace();
-      System.exit(Exceptions.INVALID_FILE_FORMAT);
+      System.exit(ExitCodes.INVALID_FILE_FORMAT);
     }
 
     // Options' values
@@ -54,7 +54,7 @@ public class App {
             endIntersectionId = args[++i];
           } catch (ArrayIndexOutOfBoundsException exception) {
             System.err.println("Invalid command line arguments");
-            System.exit(Exceptions.INVALID_COMMAND_LINE_ARGUMENTS);
+            System.exit(ExitCodes.INVALID_COMMAND_LINE_ARGUMENTS);
           }
 
           break;
