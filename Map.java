@@ -80,20 +80,20 @@ public class Map extends TransformPanel {
     computeBoundingBox();
     this.setFocus(this.boundingBox);
 
-    this.getTransform().setToTranslation(
-        -boundingBox.getX() + (this.getWidth() - this.boundingBox.getWidth()) / 2.0,
-        -boundingBox.getY() + (this.getHeight() - this.boundingBox.getHeight()) / 2.0);
+    this.drag(
+        (int) -boundingBox.getX() + (this.getWidth() - (int) this.boundingBox.getWidth()) / 2,
+        (int) -boundingBox.getY() + (this.getHeight() - (int) this.boundingBox.getHeight()) / 2);
 
     this.repaint();
   }
 
   @Override
-  protected void paintComponent(Graphics g) {
+  public void paintComponent(Graphics g) {
     super.paintComponent(g);
 
     Graphics2D g2d = (Graphics2D) g;
 
-    g2d.setTransform(this.getTransform());
+    // g2d.setTransform(this.getTransform());
 
     for (Road road : this.geo.getRoads()) {
       Intersection intersection1 = road.getIntersection1();

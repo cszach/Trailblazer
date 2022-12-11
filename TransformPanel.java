@@ -1,5 +1,8 @@
 import java.awt.Rectangle;
-import java.awt.geom.AffineTransform;
+import java.awt.MouseInfo;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import javax.swing.JPanel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -10,8 +13,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class TransformPanel extends JPanel implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
-  private AffineTransform transform;
-  private double currentRotation;
+  private double translateX = 0;
+  private double translateY = 0;
+  private double scale = 1.0;
+  private double rotate = 0.0;
   private Rectangle focus;
 
   // For mouse drags
@@ -19,14 +24,9 @@ public class TransformPanel extends JPanel implements MouseListener, MouseMotion
   private int prevMouseY;
   private boolean isRotating = false;
 
-  // For mouse scrolls
-  private int totalUnitsScrolled = 0;
-
   public TransformPanel() {
     super();
 
-    this.transform = new AffineTransform();
-    this.currentRotation = 0.0;
     this.focus = new Rectangle();
 
     this.addMouseListener(this);
@@ -45,19 +45,43 @@ public class TransformPanel extends JPanel implements MouseListener, MouseMotion
     this.focus = focus;
   }
 
-  public AffineTransform getTransform() {
-    return this.transform;
+  public void drag(int x, int y) {
+    this.translateX += x;
+    this.translateY += y;
+
+    this.repaint();
   }
 
-  public void setTransform(AffineTransform transform) {
-    this.transform = transform;
+  public void rotate(double angle) {
+    this.rotate += angle;
+
+    this.repaint();
+  }
+
+  public void zoom(double factor, double targetX, double targetY) {
+    double prevScaleX = this.scale;
+    double prevScaleY = this.scale;
+
+    this.scale *= factor;
+
+    double scaleQuotientX = this.scale / prevScaleX;
+    double scaleQuotientY = this.scale / prevScaleY;
+
+    this.translateX = scaleQuotientX * this.translateX + (1 - scaleQuotientX) * targetX;
+    this.translateY = scaleQuotientY * this.translateY + (1 - scaleQuotientY) * targetY;
   }
 
   public void center() {
-    // First, make sure translations are set to 0
-    this.transform.translate(-this.transform.getTranslateX(), -this.transform.getTranslateY());
-    // Then center
-    this.transform.translate(-this.focus.getX() + (this.getWidth() - this.focus.getWidth() * this.transform.getScaleX()) / 2.0, -this.focus.getY() + (this.getHeight() - this.focus.getHeight() * this.transform.getScaleY()) / 2.0);
+    double currentScale = this.scale;
+
+    this.zoom(1.0 / currentScale, 0, 0);
+
+    this.translateX = -this.focus.getX() + (this.getWidth() - this.focus.getWidth()) / 2.0;
+    this.translateY = -this.focus.getY() + (this.getHeight() - this.focus.getHeight()) / 2.0;
+
+    this.zoom(currentScale, this.getWidth() / 2.0, this.getHeight() / 2.0);
+
+    this.repaint();
   }
 
   @Override
@@ -83,23 +107,11 @@ public class TransformPanel extends JPanel implements MouseListener, MouseMotion
     int x = e.getX();
     int y = e.getY();
 
-    double rotationCenterX = this.focus.getX() + this.focus.getWidth() / 2.0;
-    double rotationCenterY = this.focus.getY() + this.focus.getHeight() / 2.0;
-
     if (!isRotating) {
-      // Since translation is relative, first rotate back to the original
-      // rotation (no rotation), then translate, then rotate back to the
-      // previous angle.
-      this.transform.rotate(-currentRotation, rotationCenterX, rotationCenterY);
-      this.transform.translate(x - prevMouseX, y - prevMouseY);
-      this.transform.rotate(currentRotation, rotationCenterX, rotationCenterY);
+      this.drag(x - prevMouseX, y - prevMouseY);
     } else {
-      double angle = (y - prevMouseY) * Math.PI / 500;
-      this.transform.rotate(angle, rotationCenterX, rotationCenterY);
-      this.currentRotation += angle;
+      this.rotate((y - prevMouseY) * Math.PI / 500.0);
     }
-
-    this.repaint();
 
     this.prevMouseX = x;
     this.prevMouseY = y;
@@ -112,16 +124,13 @@ public class TransformPanel extends JPanel implements MouseListener, MouseMotion
   public void mouseWheelMoved(MouseWheelEvent e) {
     int unitsToScroll = e.getUnitsToScroll();
 
-    double currentScaleX = this.transform.getScaleX();
-    double currentScaleY = this.transform.getScaleY();
+    Point mouseLocation = MouseInfo.getPointerInfo().getLocation();
+    Point panelLocation = this.getLocationOnScreen();
 
-    this.totalUnitsScrolled += unitsToScroll;
+    double mouseX = mouseLocation.getX() - panelLocation.getX();
+    double mouseY = mouseLocation.getY() - panelLocation.getY();
 
-    double newScaleX = 1.0 + this.totalUnitsScrolled / -10.0;
-    double newScaleY = 1.0 + this.totalUnitsScrolled / -10.0;
-
-    // this.transform.translate(this.focus.getWidth() / -2.0, this.focus.getHeight() / -2.0);
-    // this.transform.translate(scaleCenterX, scaleCenterX);
+    this.zoom((this.scale + unitsToScroll / -10.0) / this.scale, mouseX, mouseY);
 
     this.repaint();
   }
@@ -142,5 +151,16 @@ public class TransformPanel extends JPanel implements MouseListener, MouseMotion
     if (e.getKeyCode() == KeyEvent.VK_CONTROL) {
       this.isRotating = false;
     }
+  }
+
+  @Override
+  public void paintComponent(Graphics g) {
+    super.paintComponent(g);
+
+    Graphics2D g2d = (Graphics2D) g;
+
+    g2d.translate(this.translateX, this.translateY);
+    g2d.scale(this.scale, this.scale);
+    g2d.rotate(this.rotate, this.focus.getX() + this.focus.getWidth() / 2.0, this.focus.getY() + this.focus.getHeight() / 2.0);
   }
 }
