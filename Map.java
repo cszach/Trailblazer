@@ -80,9 +80,7 @@ public class Map extends TransformPanel {
     computeBoundingBox();
     this.setFocus(this.boundingBox);
 
-    this.drag(
-        (int) -boundingBox.getX() + (this.getWidth() - (int) this.boundingBox.getWidth()) / 2,
-        (int) -boundingBox.getY() + (this.getHeight() - (int) this.boundingBox.getHeight()) / 2);
+    this.center();
 
     this.repaint();
   }
@@ -92,8 +90,6 @@ public class Map extends TransformPanel {
     super.paintComponent(g);
 
     Graphics2D g2d = (Graphics2D) g;
-
-    // g2d.setTransform(this.getTransform());
 
     for (Road road : this.geo.getRoads()) {
       Intersection intersection1 = road.getIntersection1();
