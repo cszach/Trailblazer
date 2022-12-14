@@ -1,3 +1,4 @@
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,6 +12,8 @@ public class Map extends TransformPanel {
   private boolean debugging = false;
   private Rectangle boundingBox;
 
+  private final BasicStroke roadStroke = new BasicStroke(1.0f);
+  private final BasicStroke pathStroke = new BasicStroke(2.0f);
   private final double LOG_2 = Math.log(2);
 
   public Map(Geography geo, Projection projection) {
@@ -97,8 +100,10 @@ public class Map extends TransformPanel {
 
       if (road.getIsShortestRoad()) {
         g2d.setColor(Color.RED);
+        g2d.setStroke(pathStroke);
       } else {
         g2d.setColor(Color.BLACK);
+        g2d.setStroke(roadStroke);
       }
 
       g2d.drawLine(
@@ -111,8 +116,8 @@ public class Map extends TransformPanel {
     if (this.debugging && this.boundingBox != null) {
       Point boundingBoxCorner = this.boundingBox.getLocation();
 
-      g.setColor(Color.BLUE);
-      g.drawRect(
+      g2d.setColor(Color.BLUE);
+      g2d.drawRect(
           (int) boundingBoxCorner.getX(),
           (int) boundingBoxCorner.getY(),
           (int) (this.boundingBox.getWidth()),
