@@ -10,6 +10,8 @@ import java.util.HashMap;
  * <p>
  * An intersection is also a {@code Point} whose x and y values can be used to
  * e.g. determine its location on a drawing panel (such as {@code JPanel}).
+ *
+ * @see Road
  */
 public class Intersection extends Point {
   /**
