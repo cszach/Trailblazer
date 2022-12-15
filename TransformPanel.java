@@ -59,6 +59,10 @@ public class TransformPanel extends JPanel implements MouseListener, MouseMotion
   }
 
   public void zoom(double factor, double targetX, double targetY) {
+    if (this.scale * factor < 0) {
+      return;
+    }
+
     double prevScaleX = this.scale;
     double prevScaleY = this.scale;
 
