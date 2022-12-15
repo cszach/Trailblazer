@@ -5,8 +5,8 @@ public class AppWindow extends JFrame {
   /**
    * Initializes the application's window frame.
    *
-   * @param width the (initial) width of the frame.
-   * @param width the (initial) height of the frame.
+   * @param width the (initial) width of the frame
+   * @param width the (initial) height of the frame
    */
   public AppWindow(String title, int width, int height) {
     super(title);

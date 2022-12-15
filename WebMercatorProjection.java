@@ -1,5 +1,17 @@
 import java.awt.Point;
 
+/**
+ * The Web Mercator Projection.
+ *
+ * <p>
+ * The zoom level is an exponent for the base 2. This means that
+ * {@code zoomLevel} = 0 means x1 zoom, 1 means x2 zoom, 2 means x4 zoom, 4
+ * means x8 zoom, and so on.
+ *
+ * <p>
+ * The input latitude and longtitude must be geodetic coordinates measured in
+ * degrees.
+ */
 public class WebMercatorProjection implements Projection {
   private int width;
   private int height;

@@ -41,6 +41,8 @@ public class App {
     String endIntersectionId = null;
     boolean debugging = false;
 
+    // Parse command line arguments
+
     for (int i = 1; i < args.length; i++) {
       switch (args[i]) {
         case "--show":
@@ -100,7 +102,7 @@ public class App {
 
     if (show) {
       AppWindow window = new AppWindow("Street Mapping", 1280, 800);
-      Map map = new Map(geo, new WebMercatorProjection(window.getWidth(), window.getHeight(), 0));
+      MapPanel map = new MapPanel(geo, new WebMercatorProjection(window.getWidth(), window.getHeight(), 0));
 
       window.add(map);
       window.display();
