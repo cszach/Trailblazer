@@ -4,35 +4,24 @@
  * @see Intersection
  */
 public class Road {
-  /**
-   * The ID of this road.
-   */
+  /** The ID of this road. */
   private String id;
-  /**
-   * An intersection that is an endpoint of this road.
-   */
+  /** An intersection that is an endpoint of this road. */
   private Intersection intersection1;
-  /**
-   * An intersection that is the other endpoint of this road.
-   */
+  /** An intersection that is the other endpoint of this road. */
   private Intersection intersection2;
-  /**
-   * The distance, or length, of this road, in miles.
-   */
+  /** The distance, or length, of this road, in miles. */
   private double distance;
 
-  /**
-   * The radius of the Earth, in kilometers.
-   */
+  /** The radius of the Earth, in kilometers. */
   private static double RADIUS = 6371;
 
   // for Dijkstra
   private boolean isShortestRoad = false;
 
   /**
-   * Constructs a new {@code Road} with the given ID and {@code Intersection}
-   * endpoints.
-   * 
+   * Constructs a new {@code Road} with the given ID and {@code Intersection} endpoints.
+   *
    * @param id the ID that identifies this road
    * @param intersection1 one of the endpoints of this road
    * @param intersection2 the other endpoint of this road
@@ -52,16 +41,15 @@ public class Road {
   }
 
   /**
-   * The haversine formula calculates the distance between two geographical
-   * points given their latitudes and longtitudes.
-   * 
+   * The haversine formula calculates the distance between two geographical points given their
+   * latitudes and longtitudes.
+   *
    * @param lat1 the geodetic latitude, in degrees, of the first point
    * @param long1 the geodetic longtitude, in degrees, of the first point
    * @param lat2 the geodetic latitude, in degrees, of the second point
    * @param long2 the geodetic longtitude, in degrees, of the second point
-   * @return the distance between the two geographical points, in miles, with
-   * the assumption that the Earth is a perfect sphere with a radius of
-   * {@code RADIUS} kilometers.
+   * @return the distance between the two geographical points, in miles, with the assumption that
+   *     the Earth is a perfect sphere with a radius of {@code RADIUS} kilometers.
    */
   private static double haversine(double lat1, double long1, double lat2, double long2) {
     double dLat = Math.toRadians(lat2 - lat1);
@@ -81,9 +69,8 @@ public class Road {
   /**
    * Checks whether two roads are equal.
    *
-   * <p>
-   * Returns {code true} if the argument {@code obj} is a {@code Road} object
-   * that has the same ID and connects the same intersections as this road.
+   * <p>Returns {code true} if the argument {@code obj} is a {@code Road} object that has the same
+   * ID and connects the same intersections as this road.
    *
    * @return {@code true} if the objects are equal, {@code false} otherwise.
    */
@@ -112,7 +99,7 @@ public class Road {
 
   /**
    * Returns the first intersection of this road.
-   * 
+   *
    * @return the first intersection of this road.
    */
   public Intersection getIntersection1() {
@@ -121,7 +108,7 @@ public class Road {
 
   /**
    * Returns the second intersection of this road.
-   * 
+   *
    * @return the second intersection of this road.
    */
   public Intersection getIntersection2() {
@@ -140,11 +127,10 @@ public class Road {
   /**
    * Returns whether this road is a shortest road in a shortest path.
    *
-   * <p>
-   * This is intended for use in the Djikstra's algorithm.
-   * 
-   * @return {@code true} if this road is a shortest road in a shortest path,
-   * {@code false} otherwise.
+   * <p>This is intended for use in the Djikstra's algorithm.
+   *
+   * @return {@code true} if this road is a shortest road in a shortest path, {@code false}
+   *     otherwise.
    */
   public boolean getIsShortestRoad() {
     return this.isShortestRoad;
@@ -152,9 +138,9 @@ public class Road {
 
   /**
    * Marks or unmarks this road as the shortest road in a shortest path.
-   * 
-   * @param isShortestRoad {@code true} if this road is a shortest road in a
-   * shortest path, {@code false} if not.
+   *
+   * @param isShortestRoad {@code true} if this road is a shortest road in a shortest path, {@code
+   *     false} if not.
    */
   public void setIsShortestRoad(boolean isShortestRoad) {
     this.isShortestRoad = isShortestRoad;
@@ -162,10 +148,10 @@ public class Road {
 
   /**
    * Given an endpoint of this road, returns the other endpoint.
-   * 
+   *
    * @param intersection an endpoint of this road
-   * @return the other endpoint, or {@code null} if the given {@code Intersection}
-   * is not an endpoint of this road.
+   * @return the other endpoint, or {@code null} if the given {@code Intersection} is not an
+   *     endpoint of this road.
    */
   public Intersection getTheOtherEnd(Intersection intersection) {
     if (intersection.equals(this.intersection1)) {

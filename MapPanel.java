@@ -11,22 +11,14 @@ import java.awt.Rectangle;
  * @see Geography
  */
 public class MapPanel extends TransformPanel {
-  /**
-   * The geographical data of the map that is displayed by this panel.
-   */
+  /** The geographical data of the map that is displayed by this panel. */
   private Geography geo;
-  /**
-   * The projection used to draw the map.
-   */
+  /** The projection used to draw the map. */
   private Projection projection;
 
-  /**
-   * The debugging flag.
-   */
+  /** The debugging flag. */
   private boolean debugging = false;
-  /**
-   * The bounding box of the drawn map without any {@code AffineTransform}.
-   */
+  /** The bounding box of the drawn map without any {@code AffineTransform}. */
   private Rectangle boundingBox;
 
   private final BasicStroke roadStroke = new BasicStroke(1.0f);
@@ -34,8 +26,8 @@ public class MapPanel extends TransformPanel {
   private final double LOG_2 = Math.log(2);
 
   /**
-   * Constructs a new {@code MapPanel} to draw the given {@code Geography} using
-   * the given {@code Projection}.
+   * Constructs a new {@code MapPanel} to draw the given {@code Geography} using the given {@code
+   * Projection}.
    *
    * @param geo the {@code Geography} for display
    * @param projection the {@code Projection} used to display the map
@@ -49,17 +41,17 @@ public class MapPanel extends TransformPanel {
 
   /**
    * Turns on or off debugging mode.
-   * 
-   * @param debugging {@code true} to turn on debugging mode, {@code false} to
-   * turn off debugging mode
+   *
+   * @param debugging {@code true} to turn on debugging mode, {@code false} to turn off debugging
+   *     mode
    */
   public void setDebugging(boolean debugging) {
     this.debugging = debugging;
   }
 
   /**
-   * Assigns x and y values for all the intersections in the current
-   * {@code Geography} using the current {@code Projection}.
+   * Assigns x and y values for all the intersections in the current {@code Geography} using the
+   * current {@code Projection}.
    */
   public void project() {
     for (Intersection intersection : this.geo.getIntersections()) {
@@ -71,8 +63,7 @@ public class MapPanel extends TransformPanel {
   /**
    * Computes the bounding box of the projected map.
    *
-   * <p>
-   * Works only when the {@code project} method has been invoked.
+   * <p>Works only when the {@code project} method has been invoked.
    *
    * @see project
    */
@@ -110,11 +101,9 @@ public class MapPanel extends TransformPanel {
   }
 
   /**
-   * Reprojects the map such that the map's bounding box fits the panel and
-   * repaints.
+   * Reprojects the map such that the map's bounding box fits the panel and repaints.
    *
-   * <p>
-   * Rotation and scale are preserved.
+   * <p>Rotation and scale are preserved.
    */
   public void resetView() {
     computeBoundingBox();
@@ -126,7 +115,10 @@ public class MapPanel extends TransformPanel {
     }
 
     this.projection.setZoomLevel(
-        (Math.log(this.projection.getWidth() / (this.boundingBox.getWidth() / Math.pow(2.0, this.projection.getZoomLevel()))) / LOG_2));
+        (Math.log(
+                this.projection.getWidth()
+                    / (this.boundingBox.getWidth() / Math.pow(2.0, this.projection.getZoomLevel())))
+            / LOG_2));
     this.project();
 
     computeBoundingBox();
@@ -140,9 +132,7 @@ public class MapPanel extends TransformPanel {
   /**
    * Draws the map by drawing the roads.
    *
-   * <p>
-   * This method only works when the map has been projected. See the
-   * {@code project} method.
+   * <p>This method only works when the map has been projected. See the {@code project} method.
    *
    * @see project
    */

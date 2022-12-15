@@ -1,18 +1,19 @@
-import java.awt.Rectangle;
-import java.awt.MouseInfo;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.MouseInfo;
 import java.awt.Point;
-import javax.swing.JPanel;
+import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import javax.swing.JPanel;
 
-public class TransformPanel extends JPanel implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
+public class TransformPanel extends JPanel
+    implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
   private double translateX = 0;
   private double translateY = 0;
   private double scale = 1.0;
@@ -140,8 +141,7 @@ public class TransformPanel extends JPanel implements MouseListener, MouseMotion
   }
 
   @Override
-  public void keyTyped(KeyEvent e) {
-  }
+  public void keyTyped(KeyEvent e) {}
 
   @Override
   public void keyPressed(KeyEvent e) {
@@ -165,6 +165,9 @@ public class TransformPanel extends JPanel implements MouseListener, MouseMotion
 
     g2d.translate(this.translateX, this.translateY);
     g2d.scale(this.scale, this.scale);
-    g2d.rotate(this.rotate, this.focus.getX() + this.focus.getWidth() / 2.0, this.focus.getY() + this.focus.getHeight() / 2.0);
+    g2d.rotate(
+        this.rotate,
+        this.focus.getX() + this.focus.getWidth() / 2.0,
+        this.focus.getY() + this.focus.getHeight() / 2.0);
   }
 }
