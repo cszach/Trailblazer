@@ -1,3 +1,5 @@
+package io.github.cszach.Trailblazer.gui;
+
 import javax.swing.JFrame;
 
 /** The main application's GUI frame */

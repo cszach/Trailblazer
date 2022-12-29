@@ -1,6 +1,15 @@
+package io.github.cszach.Trailblazer;
+
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
+
+import io.github.cszach.Trailblazer.geo.Intersection;
+import io.github.cszach.Trailblazer.geo.Road;
+import io.github.cszach.Trailblazer.geo.Geography;
+import io.github.cszach.Trailblazer.gui.MapPanel;
+import io.github.cszach.Trailblazer.gui.AppWindow;
+import io.github.cszach.Trailblazer.projection.WebMercatorProjection;
 
 /** The main application */
 public class App {
@@ -8,16 +17,16 @@ public class App {
    * Reads command line arguments and starts the program accordingly.
    *
    * @param args an array of command line arguments. Accepted options are
-   *     <ul>
-   *       <li>{@code <MAP>}: the path of the map data file, which must be the first argument. The
-   *           other options can be specified in any order;
-   *       <li>{@code --show}: display the map in GUI mode;
-   *       <li>{@code --directions <INTERSECTION1> <INTERSECTION2>}: print the intersections that
-   *           form the shortest path between {@code <INTERSECTION1>} and {@code <INTERSECTION2>},
-   *           which is indicated on the GUI if {@code --show} is present;
-   *       <li>{@code --debug}: turn on debugging mode, which draws a bounding box around the map on
-   *           the GUI panel.
-   *     </ul>
+   *        <ul>
+   *        <li>{@code <MAP>}: the path of the map data file, which must be the first argument. The
+   *        other options can be specified in any order;
+   *        <li>{@code --show}: display the map in GUI mode;
+   *        <li>{@code --directions <INTERSECTION1> <INTERSECTION2>}: print the intersections that
+   *        form the shortest path between {@code <INTERSECTION1>} and {@code <INTERSECTION2>},
+   *        which is indicated on the GUI if {@code --show} is present;
+   *        <li>{@code --debug}: turn on debugging mode, which draws a bounding box around the map
+   *        on the GUI panel.
+   *        </ul>
    */
   public static void main(String[] args) {
     Geography geo = new Geography();

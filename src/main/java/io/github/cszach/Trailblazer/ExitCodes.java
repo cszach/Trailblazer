@@ -1,3 +1,5 @@
+package io.github.cszach.Trailblazer;
+
 /** A class containing all exit codes of the program. */
 class ExitCodes {
   static final int INVALID_COMMAND_LINE_ARGUMENTS = 1;

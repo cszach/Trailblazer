@@ -1,3 +1,5 @@
+package io.github.cszach.Trailblazer.geo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -49,7 +51,7 @@ public class Geography {
    *
    * @param intersectionId the ID of the intersection
    * @return the intersection that is identified by the specified ID, or {@code null} if such an
-   *     intersection does not exist in this geography.
+   *         intersection does not exist in this geography.
    */
   public Intersection getIntersection(String intersectionId) {
     return this.intersections.get(intersectionId);
@@ -60,7 +62,7 @@ public class Geography {
    *
    * @param roadId the ID of the road
    * @return the road that is identified by the specified ID, or {@code null} if such a road does
-   *     not exist in this geography.
+   *         not exist in this geography.
    */
   public Road getRoad(String roadId) {
     for (Road road : this.roads) {
@@ -75,27 +77,28 @@ public class Geography {
   /**
    * Imports data about a geography from a file.
    *
-   * <p>The file format is hard-coded and assumed to be as follows:
+   * <p>
+   * The file format is hard-coded and assumed to be as follows:
    *
    * <ul>
-   *   <li>The file consists of multiple entries separated by whitespace (but preferably a newline
-   *       character);
-   *   <li>An entry has cells that are delimited by whitespace;
-   *   <li>If the first cell of an entry is {@code i}, the entry describes an intersection, and the
-   *       next three cells describe the ID, the latitude, and the longtitude of the intersection,
-   *       respectively. The ID is a string with no whitespace, and the latitude and longtitude are
-   *       decimal values in degrees;
-   *   <li>If the first cell of an entry is {@code r}, the entry describes a road, and the next
-   *       three cells describe the ID of the road and the IDs of the two intersections that it
-   *       connects, respectively. All are string with no whitespace;
-   *   <li>No entry can start with neither {@code i} nor {@code r};
-   *   <li>There should be no redundant cells; that is, each entry has exactly four cells.
+   * <li>The file consists of multiple entries separated by whitespace (but preferably a newline
+   * character);
+   * <li>An entry has cells that are delimited by whitespace;
+   * <li>If the first cell of an entry is {@code i}, the entry describes an intersection, and the
+   * next three cells describe the ID, the latitude, and the longtitude of the intersection,
+   * respectively. The ID is a string with no whitespace, and the latitude and longtitude are
+   * decimal values in degrees;
+   * <li>If the first cell of an entry is {@code r}, the entry describes a road, and the next three
+   * cells describe the ID of the road and the IDs of the two intersections that it connects,
+   * respectively. All are string with no whitespace;
+   * <li>No entry can start with neither {@code i} nor {@code r};
+   * <li>There should be no redundant cells; that is, each entry has exactly four cells.
    * </ul>
    *
    * @param path the path of the file to read from
    * @throws FileNotFoundException when the specified file does not exist.
    * @throws NoSuchElementException when there is a trouble reading the file, which the program
-   *     assumes to be due to an invalid file format.
+   *         assumes to be due to an invalid file format.
    */
   public void importFromFile(String path) throws FileNotFoundException, NoSuchElementException {
     File file = new File(path);
@@ -166,27 +169,25 @@ public class Geography {
    * @param startIntersection the start intersection
    * @param endIntersection the end intersection
    * @return a (linked) list of roads that form the shortest path between the start intersection and
-   *     the end, in the order that they should be taken starting from the start intersection.
+   *         the end, in the order that they should be taken starting from the start intersection.
    */
-  public LinkedList<Road> findShortestPath(
-      Intersection startIntersection, Intersection endIntersection) {
+  public LinkedList<Road> findShortestPath(Intersection startIntersection,
+      Intersection endIntersection) {
     PriorityQueue<Intersection> q =
-        new PriorityQueue<>(
-            this.intersections.size(),
-            new Comparator<Intersection>() {
-              @Override
-              public int compare(Intersection intersection1, Intersection intersection2) {
-                double diff = intersection1.getDistance() - intersection2.getDistance();
+        new PriorityQueue<>(this.intersections.size(), new Comparator<Intersection>() {
+          @Override
+          public int compare(Intersection intersection1, Intersection intersection2) {
+            double diff = intersection1.getDistance() - intersection2.getDistance();
 
-                if (diff > 0) {
-                  return 1;
-                } else if (diff < 0) {
-                  return -1;
-                } else {
-                  return 0;
-                }
-              }
-            });
+            if (diff > 0) {
+              return 1;
+            } else if (diff < 0) {
+              return -1;
+            } else {
+              return 0;
+            }
+          }
+        });
 
     Collection<Intersection> intersections = this.intersections.values();
 
