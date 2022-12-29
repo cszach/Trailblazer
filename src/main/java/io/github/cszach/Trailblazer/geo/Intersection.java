@@ -1,3 +1,5 @@
+package io.github.cszach.Trailblazer.geo;
+
 import java.awt.Point;
 import java.util.HashMap;
 

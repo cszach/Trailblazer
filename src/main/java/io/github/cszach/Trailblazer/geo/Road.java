@@ -1,3 +1,5 @@
+package io.github.cszach.Trailblazer.geo;
+
 public class Road {
   private String id;
   private Intersection intersection1;

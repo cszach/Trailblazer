@@ -1,3 +1,5 @@
+package io.github.cszach.Trailblazer.projection;
+
 import java.awt.Point;
 
 public class WebMercatorProjection implements Projection {

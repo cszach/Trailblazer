@@ -1,8 +1,15 @@
+package io.github.cszach.Trailblazer.gui;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+
+import io.github.cszach.Trailblazer.geo.Intersection;
+import io.github.cszach.Trailblazer.geo.Road;
+import io.github.cszach.Trailblazer.geo.Geography;
+import io.github.cszach.Trailblazer.projection.Projection;
 
 public class Map extends TransformPanel {
   private Geography geo;

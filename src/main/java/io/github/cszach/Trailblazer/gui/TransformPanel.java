@@ -1,3 +1,5 @@
+package io.github.cszach.Trailblazer.gui;
+
 import java.awt.Rectangle;
 import java.awt.MouseInfo;
 import java.awt.Graphics;

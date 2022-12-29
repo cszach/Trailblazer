@@ -1,6 +1,15 @@
+package io.github.cszach.Trailblazer;
+
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
+
+import io.github.cszach.Trailblazer.geo.Intersection;
+import io.github.cszach.Trailblazer.geo.Road;
+import io.github.cszach.Trailblazer.geo.Geography;
+import io.github.cszach.Trailblazer.gui.Map;
+import io.github.cszach.Trailblazer.gui.AppWindow;
+import io.github.cszach.Trailblazer.projection.WebMercatorProjection;
 
 /** The main application */
 public class App {
