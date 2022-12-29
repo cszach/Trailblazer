@@ -14,11 +14,53 @@ import java.awt.event.MouseWheelListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class TransformPanel extends JPanel implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
+/**
+ * A {@code JPanel} whose graphics is draggable, zoomable, and rotatable.
+ *
+ * <p>
+ * Listeners are implemented to listen to specific user's actions. In addition,
+ * APIs are provided to simulate such actions. See the {@code drag},
+ * {@code rotate}, {@code zoom} methods.
+ *
+ * <p>
+ * To drag the graphics on this panel, press, hold, and drag the mouse. To zoom,
+ * scroll the mouse wheel. To rotate, press and hold the Ctrl key while
+ * pressing, holding, and dragging the mouse.
+ *
+ * <p>
+ * When extending from this class, it is important to invoke this class's
+ * constructor in the child class's constructor (i.e. {@code super()}), and
+ * invoke this class's {@code paintComponent} in the child class's
+ * {@code paintComponent} method.
+ *
+ * @author Zach
+ * @version 0.1.0
+ *
+ * @see #drag(int, int)
+ * @see #rotate(double)
+ * @see #zoom(double, double, double)
+ */
+public abstract class TransformPanel extends JPanel implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
+  /**
+   * The current (net) amount of translation on the x-axis in double precision.
+   */
   private double translateX = 0;
+  /**
+   * The current (net) amount of translation on the y-axis in double precision.
+   */
   private double translateY = 0;
+  /**
+   * The current (net) amount of scale.
+   */
   private double scale = 1.0;
+  /**
+   * The current (net) amount of rotation, in radians.
+   */
   private double rotate = 0.0;
+  /**
+   * The bounding box of the focused object of this panel; the center of scale
+   * and rotation is the center of the box.
+   */
   private Rectangle focus;
 
   // For mouse drags
@@ -26,6 +68,10 @@ public class TransformPanel extends JPanel implements MouseListener, MouseMotion
   private int prevMouseY;
   private boolean isRotating = false;
 
+  /**
+   * Constructs a new {@code TransformPanel} with no focus and all the listeners
+   * added.
+   */
   public TransformPanel() {
     super();
 
@@ -39,14 +85,33 @@ public class TransformPanel extends JPanel implements MouseListener, MouseMotion
     this.setFocusable(true);
   }
 
+  /**
+   * Returns the bounding box of the focused object in this panel.
+   * 
+   * @return the bounding box of the focused object in this panel.
+   */
   public Rectangle getFocus() {
     return this.focus;
   }
 
+  /**
+   * Sets the bounding box of the focused object in this panel.
+   *
+   * @param focus the bounding box of the focused object in this panel
+   */
   public void setFocus(Rectangle focus) {
     this.focus = focus;
   }
 
+  /**
+   * Simulates a drag action.
+   *
+   * <p>
+   * Input values' signs indicate direction according to Java Swing's rules.
+   * 
+   * @param x the distance on the x-axis that is dragged
+   * @param y the distance on the y-axis that is dragged
+   */
   public void drag(int x, int y) {
     this.translateX += x;
     this.translateY += y;
@@ -54,12 +119,25 @@ public class TransformPanel extends JPanel implements MouseListener, MouseMotion
     this.repaint();
   }
 
+  /**
+   * Simulates a rotate action.
+   * 
+   * @param angle the angle of rotation, in radians
+   */
   public void rotate(double angle) {
     this.rotate += angle;
 
     this.repaint();
   }
 
+  /**
+   * Simulates a zoom action.
+   * 
+   * @param factor the factor of scale e.g. {@code factor} = 2 means double the
+   * current amount of zoom
+   * @param targetX the x coordinate of the center of scale
+   * @param targetY the y coordinate of the center of scale
+   */
   public void zoom(double factor, double targetX, double targetY) {
     if (this.scale * factor < 0) {
       return;
@@ -77,6 +155,14 @@ public class TransformPanel extends JPanel implements MouseListener, MouseMotion
     this.translateY = scaleQuotientY * this.translateY + (1 - scaleQuotientY) * targetY;
   }
 
+  /**
+   * Centers the focused object on the panel while keeping the current rotation
+   * and zoom level.
+   *
+   * <p>
+   * Technically, centering is done such that the center of the bounding box
+   * will be on the center of this panel.
+   */
   public void center() {
     double currentScale = this.scale;
 
@@ -159,6 +245,14 @@ public class TransformPanel extends JPanel implements MouseListener, MouseMotion
     }
   }
 
+  /**
+   * Draw graphics on this panel, with transforms from drag, zoom, and rotate
+   * actions applied.
+   *
+   * <p>
+   * For children classes: invoke {@code super.paintComponent(g)} for the
+   * transforms to take effect.
+   */
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);

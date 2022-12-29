@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 import io.github.cszach.Trailblazer.geo.Intersection;
 import io.github.cszach.Trailblazer.geo.Road;
 import io.github.cszach.Trailblazer.geo.Geography;
-import io.github.cszach.Trailblazer.gui.Map;
+import io.github.cszach.Trailblazer.gui.MapPanel;
 import io.github.cszach.Trailblazer.gui.AppWindow;
 import io.github.cszach.Trailblazer.projection.WebMercatorProjection;
 
@@ -49,6 +49,8 @@ public class App {
     String startIntersectionId = null;
     String endIntersectionId = null;
     boolean debugging = false;
+
+    // Parse command line arguments
 
     for (int i = 1; i < args.length; i++) {
       switch (args[i]) {
@@ -109,7 +111,7 @@ public class App {
 
     if (show) {
       AppWindow window = new AppWindow("Street Mapping", 1280, 800);
-      Map map = new Map(geo, new WebMercatorProjection(window.getWidth(), window.getHeight(), 0));
+      MapPanel map = new MapPanel(geo, new WebMercatorProjection(window.getWidth(), window.getHeight(), 0));
 
       window.add(map);
       window.display();

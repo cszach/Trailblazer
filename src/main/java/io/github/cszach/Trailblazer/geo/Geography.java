@@ -49,7 +49,7 @@ public class Geography {
   /**
    * Returns an intersection in this geography.
    *
-   * @param intersectionId the ID of the intersection.
+   * @param intersectionId the ID of the intersection
    * @return the intersection that is identified by the specified ID, or {@code null} if such an
    *     intersection does not exist in this geography.
    */
@@ -60,7 +60,7 @@ public class Geography {
   /**
    * Returns a road in this geography.
    *
-   * @param roadId the ID of the road.
+   * @param roadId the ID of the road
    * @return the road that is identified by the specified ID, or {@code null} if such a road does
    *     not exist in this geography.
    */
@@ -94,7 +94,7 @@ public class Geography {
    *   <li>There should be no redundant cells; that is, each entry has exactly four cells.
    * </ul>
    *
-   * @param path the path of the file to read from.
+   * @param path the path of the file to read from
    * @throws FileNotFoundException when the specified file does not exist.
    * @throws NoSuchElementException when there is a trouble reading the file, which the program
    *     assumes to be due to an invalid file format.
@@ -165,8 +165,8 @@ public class Geography {
   /**
    * Finds the shortest path between two given intersections using Dijkstra's algorithm.
    *
-   * @param startIntersection the start intersection.
-   * @param endIntersection the end intersection.
+   * @param startIntersection the start intersection
+   * @param endIntersection the end intersection
    * @return a (linked) list of roads that form the shortest path between the start intersection and
    *     the end, in the order that they should be taken starting from the start intersection.
    */
@@ -201,6 +201,8 @@ public class Geography {
     startIntersection.setPrev(null);
     q.add(startIntersection);
 
+    // Main Dijkstra's algorithm's loop
+
     while (!q.isEmpty()) {
       Intersection min = q.poll();
       if (min.equals(endIntersection)) {
@@ -221,6 +223,8 @@ public class Geography {
         }
       }
     }
+
+    // Compile the list of roads in the shortest path
 
     Intersection currentIntersection = endIntersection;
     LinkedList<Road> shortestPath = new LinkedList<>();
