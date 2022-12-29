@@ -76,7 +76,6 @@ mvn exec:java -Dexec.args="data/monroe.txt --show"
 ![](screenshots/monroe.png)
 
 ```
-java App data/nys.txt --directions i102030 i80549 --show
 mvn exec:java -Dexec.args="data/nys.txt --directions i102030 i80549 --show"
 ```
 
