@@ -1,25 +1,19 @@
-<<<<<<< HEAD:src/main/java/io/github/cszach/Trailblazer/gui/TransformPanel.java
 package io.github.cszach.Trailblazer.gui;
 
 import java.awt.Rectangle;
 import java.awt.MouseInfo;
-=======
->>>>>>> main:TransformPanel.java
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.MouseInfo;
 import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import javax.swing.JPanel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import javax.swing.JPanel;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-<<<<<<< HEAD:src/main/java/io/github/cszach/Trailblazer/gui/TransformPanel.java
 /**
  * A {@code JPanel} whose graphics is draggable, zoomable, and rotatable.
  *
@@ -48,10 +42,6 @@ public abstract class TransformPanel extends JPanel
   /**
    * The current (net) amount of translation on the x-axis in double precision.
    */
-=======
-public class TransformPanel extends JPanel
-    implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
->>>>>>> main:TransformPanel.java
   private double translateX = 0;
   /**
    * The current (net) amount of translation on the y-axis in double precision.
@@ -264,13 +254,7 @@ public class TransformPanel extends JPanel
 
     g2d.translate(this.translateX, this.translateY);
     g2d.scale(this.scale, this.scale);
-<<<<<<< HEAD:src/main/java/io/github/cszach/Trailblazer/gui/TransformPanel.java
     g2d.rotate(this.rotate, this.focus.getX() + this.focus.getWidth() / 2.0,
-=======
-    g2d.rotate(
-        this.rotate,
-        this.focus.getX() + this.focus.getWidth() / 2.0,
->>>>>>> main:TransformPanel.java
         this.focus.getY() + this.focus.getHeight() / 2.0);
   }
 }
