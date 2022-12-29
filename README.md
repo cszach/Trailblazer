@@ -3,16 +3,18 @@
 An interactive desktop map that can help you find the shortest path between two
 intersections.
 
-## Compile
+## Build
+
+This project uses Maven.
 
 ```
-javac App.java
+mvn package
 ```
 
 ## Run
 
 ```
-java App FILE [--directions START END] [--show]
+mvn exec:java -Dexec.args="FILE [--directions START END] [--show]"
 ```
 where:
 - `FILE` is the file that contains the map data;
@@ -39,7 +41,7 @@ Data is from [OpenStreetMap](https://www.openstreetmap.org).
 ## Examples
 
 ```
-java App data/ur.txt --directions SUEB HOYT --show
+mvn exec:java -Dexec.args="data/ur.txt --directions SUEB HOYT --show"
 ```
 
 …shows UR freshmen how to get from their dorm to Hoyt auditorium (where the
@@ -66,7 +68,7 @@ Total miles travelled: 0.23207491657297358
 Here are some more examples.
 
 ```
-java App data/monroe.txt --show
+mvn exec:java -Dexec.args="data/monroe.txt --show"
 ```
 
 …shows the Monroe county.
@@ -75,6 +77,7 @@ java App data/monroe.txt --show
 
 ```
 java App data/nys.txt --directions i102030 i80549 --show
+mvn exec:java -Dexec.args="data/nys.txt --directions i102030 i80549 --show"
 ```
 
 …shows how to get from the very West of the NY state all the way to Long Island
