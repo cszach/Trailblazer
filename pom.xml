@@ -40,6 +40,15 @@
             </execution>
           </executions>
         </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>3.1.0</version>
+          <configuration>
+            <executable>maven</executable>
+            <mainClass>io.github.cszach.Trailblazer.App</mainClass>
+          </configuration>
+        </plugin>
     </plugins>
   </build>
 </project>
