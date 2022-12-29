@@ -6,13 +6,11 @@ import java.awt.Point;
  * The Web Mercator Projection.
  *
  * <p>
- * The zoom level is an exponent for the base 2. This means that
- * {@code zoomLevel} = 0 means x1 zoom, 1 means x2 zoom, 2 means x4 zoom, 4
- * means x8 zoom, and so on.
+ * The zoom level is an exponent for the base 2. This means that {@code zoomLevel} = 0 means x1
+ * zoom, 1 means x2 zoom, 2 means x4 zoom, 4 means x8 zoom, and so on.
  *
  * <p>
- * The input latitude and longtitude must be geodetic coordinates measured in
- * degrees.
+ * The input latitude and longtitude must be geodetic coordinates measured in degrees.
  */
 public class WebMercatorProjection implements Projection {
   private int width;
@@ -60,18 +58,17 @@ public class WebMercatorProjection implements Projection {
     longtitude = Math.toRadians(longtitude);
 
     double x = (this.width / TWO_PI) * this.numTiles * (longtitude + Math.PI);
-    double y =
-        (this.height / TWO_PI)
-            * this.numTiles
-            * (Math.PI - Math.log(Math.tan(QUARTER_PI + latitude / 2)));
-    
-    // if (zoomLevel != 0) {
-    //   double roundedZoomLevel = Math.ceil(this.zoomLevel * log2(this.getWidth() / 256.0));
-    //   double n = Math.pow(2, roundedZoomLevel);
-    //   double x256 = n * ((1.0 + (longtitude / Math.PI)) / 2.0);
-    //   double y256 = n * ((1.0 - (Math.log(Math.tan(latitude) + 1.0 / Math.cos(latitude)) / Math.PI)) / 2.0);
+    double y = (this.height / TWO_PI) * this.numTiles
+        * (Math.PI - Math.log(Math.tan(QUARTER_PI + latitude / 2)));
 
-    //   System.out.println(Math.floor(x256) + " " + Math.floor(y256) + " " + roundedZoomLevel);
+    // if (zoomLevel != 0) {
+    // double roundedZoomLevel = Math.ceil(this.zoomLevel * log2(this.getWidth() / 256.0));
+    // double n = Math.pow(2, roundedZoomLevel);
+    // double x256 = n * ((1.0 + (longtitude / Math.PI)) / 2.0);
+    // double y256 = n * ((1.0 - (Math.log(Math.tan(latitude) + 1.0 / Math.cos(latitude)) /
+    // Math.PI)) / 2.0);
+
+    // System.out.println(Math.floor(x256) + " " + Math.floor(y256) + " " + roundedZoomLevel);
     // }
 
     return new Point((int) x, (int) y);

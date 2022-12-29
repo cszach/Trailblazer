@@ -10,8 +10,8 @@ import java.util.HashMap;
  * An intersection is identified by its ID and has a latitude and longtitude.
  *
  * <p>
- * An intersection is also a {@code Point} whose x and y values can be used to
- * e.g. determine its location on a drawing panel (such as {@code JPanel}).
+ * An intersection is also a {@code Point} whose x and y values can be used to e.g. determine its
+ * location on a drawing panel (such as {@code JPanel}).
  *
  * @see Road
  */
@@ -29,8 +29,8 @@ public class Intersection extends Point {
    */
   private double longtitude;
   /**
-   * A {@code Map} that maps this intersection's neighbors to the roads that
-   * connect between this intersection and the respective neighbor.
+   * A {@code Map} that maps this intersection's neighbors to the roads that connect between this
+   * intersection and the respective neighbor.
    */
   private HashMap<Intersection, Road> neighbors;
 
@@ -39,9 +39,8 @@ public class Intersection extends Point {
   private Road prev;
 
   /**
-   * Constructs a new {@code Intersection} with the given ID, latitude, and
-   * longtitude.
-   * 
+   * Constructs a new {@code Intersection} with the given ID, latitude, and longtitude.
+   *
    * @param id the ID that identifies the intersection
    * @param latitude the geodetic latitude, in degrees, of this intersection
    * @param longtitude the geodetic longtitude, in degrees, of this intersection
@@ -58,17 +57,15 @@ public class Intersection extends Point {
    * Checks whether two intersections are equal.
    *
    * <p>
-   * Returns {@code true} if the argument {@code obj} is an {@code Intersection}
-   * object and has the same ID, latitude, and longtitude as this intersection.
+   * Returns {@code true} if the argument {@code obj} is an {@code Intersection} object and has the
+   * same ID, latitude, and longtitude as this intersection.
    *
    * @return {@code true} if the objects are equal, {@code false} otherwise.
    */
   @Override
   public boolean equals(Object obj) {
-    return (obj instanceof Intersection intersection)
-        && (this.id.equals(intersection.id))
-        && (this.latitude == intersection.latitude)
-        && this.longtitude == intersection.longtitude;
+    return (obj instanceof Intersection intersection) && (this.id.equals(intersection.id))
+        && (this.latitude == intersection.latitude) && this.longtitude == intersection.longtitude;
   }
 
   @Override
@@ -78,7 +75,7 @@ public class Intersection extends Point {
 
   /**
    * Returns the ID of this intersection.
-   * 
+   *
    * @return the ID of this intersection.
    */
   public String getId() {
@@ -87,7 +84,7 @@ public class Intersection extends Point {
 
   /**
    * Returns the latitude of this intersection.
-   * 
+   *
    * @return the geodetic latitude, in degrees, of this intersection.
    */
   public double getLatitude() {
@@ -96,7 +93,7 @@ public class Intersection extends Point {
 
   /**
    * Returns the longtitude of this intersection.
-   * 
+   *
    * @return the geodetic longtitude, in degrees, of this intersection.
    */
   public double getLongtitude() {
@@ -104,73 +101,67 @@ public class Intersection extends Point {
   }
 
   /**
-   * Returns the {@code HashMap} that maps from the neighbors of this
-   * intersection to the roads that connect this intersection and the
-   * corresponding neighbor.
-   * 
-   * @return the {@code HashMap} that maps from the neighbors of this
-   * intersection to the roads that connect this intersection and the
-   * corresponding neighbor.
+   * Returns the {@code HashMap} that maps from the neighbors of this intersection to the roads that
+   * connect this intersection and the corresponding neighbor.
+   *
+   * @return the {@code HashMap} that maps from the neighbors of this intersection to the roads that
+   *         connect this intersection and the corresponding neighbor.
    */
   public HashMap<Intersection, Road> getNeighbors() {
     return this.neighbors;
   }
 
   /**
-   * Returns the distance of the shortest path that connects between a start
-   * intersection and this intersection.
+   * Returns the distance of the shortest path that connects between a start intersection and this
+   * intersection.
    *
    * <p>
    * This is intended for use in the Djikstra's algorithm.
-   * 
-   * @return the distance, in miles, of the shortest path that connects between
-   * a start intersection and this intersection.
+   *
+   * @return the distance, in miles, of the shortest path that connects between a start intersection
+   *         and this intersection.
    */
   protected double getDistance() {
     return this.distance;
   }
 
   /**
-   * Returns the road that connects this intersection and the previous
-   * intersection in the shortest path between a start intersection and this
-   * intersection.
-   * 
+   * Returns the road that connects this intersection and the previous intersection in the shortest
+   * path between a start intersection and this intersection.
+   *
    * <p>
    * This is intended for use in the Djikstra's algorithm.
    *
-   * @return the road that connects this intersection and the previous
-   * intersection in the shortest path between a start intersection and this
-   * intersection.
+   * @return the road that connects this intersection and the previous intersection in the shortest
+   *         path between a start intersection and this intersection.
    */
   protected Road getPrev() {
     return this.prev;
   }
 
   /**
-   * Updates the distance of the shortest path that connects between a start
-   * intersection and this intersection.
+   * Updates the distance of the shortest path that connects between a start intersection and this
+   * intersection.
    *
    * <p>
    * This is intended for use in the Djikstra's algorithm.
-   * 
-   * @param distance the new distance of the shortest path that connects between
-   * a start intersection and this intersection
+   *
+   * @param distance the new distance of the shortest path that connects between a start
+   *        intersection and this intersection
    */
   protected void setDistance(double distance) {
     this.distance = distance;
   }
 
   /**
-   * Updates the road that connects this intersection and the previous
-   * intersection in the shortest path between a start intersection and this
-   * intersection.
-   * 
+   * Updates the road that connects this intersection and the previous intersection in the shortest
+   * path between a start intersection and this intersection.
+   *
    * <p>
    * This is intended for use in the Djikstra's algorithm.
    *
-   * @param prev the new road that connects this intersection and the previous
-   * intersection in the shortest path between a start intersection and this
-   * intersection.
+   * @param prev the new road that connects this intersection and the previous intersection in the
+   *        shortest path between a start intersection and this intersection.
    */
   protected void setPrev(Road prev) {
     this.prev = prev;

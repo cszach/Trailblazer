@@ -32,9 +32,8 @@ public class Road {
   private boolean isShortestRoad = false;
 
   /**
-   * Constructs a new {@code Road} with the given ID and {@code Intersection}
-   * endpoints.
-   * 
+   * Constructs a new {@code Road} with the given ID and {@code Intersection} endpoints.
+   *
    * @param id the ID that identifies this road
    * @param intersection1 one of the endpoints of this road
    * @param intersection2 the other endpoint of this road
@@ -45,25 +44,20 @@ public class Road {
     this.intersection2 = intersection2;
 
     // Compute the distance using the haversine formula
-    this.distance =
-        haversine(
-            intersection1.getLatitude(),
-            intersection1.getLongtitude(),
-            intersection2.getLatitude(),
-            intersection2.getLongtitude());
+    this.distance = haversine(intersection1.getLatitude(), intersection1.getLongtitude(),
+        intersection2.getLatitude(), intersection2.getLongtitude());
   }
 
   /**
-   * The haversine formula calculates the distance between two geographical
-   * points given their latitudes and longtitudes.
-   * 
+   * The haversine formula calculates the distance between two geographical points given their
+   * latitudes and longtitudes.
+   *
    * @param lat1 the geodetic latitude, in degrees, of the first point
    * @param long1 the geodetic longtitude, in degrees, of the first point
    * @param lat2 the geodetic latitude, in degrees, of the second point
    * @param long2 the geodetic longtitude, in degrees, of the second point
-   * @return the distance between the two geographical points, in miles, with
-   * the assumption that the Earth is a perfect sphere with a radius of
-   * {@code RADIUS} kilometers.
+   * @return the distance between the two geographical points, in miles, with the assumption that
+   *         the Earth is a perfect sphere with a radius of {@code RADIUS} kilometers.
    */
   private static double haversine(double lat1, double long1, double lat2, double long2) {
     double dLat = Math.toRadians(lat2 - lat1);
@@ -72,9 +66,8 @@ public class Road {
     lat1 = Math.toRadians(lat1);
     lat2 = Math.toRadians(lat2);
 
-    double a =
-        Math.pow(Math.sin(dLat / 2), 2)
-            + Math.pow(Math.sin(dLong / 2), 2) * Math.cos(lat1) * Math.cos(lat2);
+    double a = Math.pow(Math.sin(dLat / 2), 2)
+        + Math.pow(Math.sin(dLong / 2), 2) * Math.cos(lat1) * Math.cos(lat2);
     double c = 2 * Math.asin(Math.sqrt(a));
     double d = RADIUS * c; // in kilometers
     return d * 0.62; // convert to miles
@@ -84,18 +77,17 @@ public class Road {
    * Checks whether two roads are equal.
    *
    * <p>
-   * Returns {code true} if the argument {@code obj} is a {@code Road} object
-   * that has the same ID and connects the same intersections as this road.
+   * Returns {code true} if the argument {@code obj} is a {@code Road} object that has the same ID
+   * and connects the same intersections as this road.
    *
    * @return {@code true} if the objects are equal, {@code false} otherwise.
    */
   @Override
   public boolean equals(Object obj) {
-    return (obj instanceof Road road)
-        && ((this.intersection1.equals(road.intersection1))
-                && (this.intersection2.equals(road.intersection2))
-            || (this.intersection1.equals(road.intersection2))
-                && (this.intersection2.equals(road.intersection1)));
+    return (obj instanceof Road road) && ((this.intersection1.equals(road.intersection1))
+        && (this.intersection2.equals(road.intersection2))
+        || (this.intersection1.equals(road.intersection2))
+            && (this.intersection2.equals(road.intersection1)));
   }
 
   @Override
@@ -114,7 +106,7 @@ public class Road {
 
   /**
    * Returns the first intersection of this road.
-   * 
+   *
    * @return the first intersection of this road.
    */
   public Intersection getIntersection1() {
@@ -123,7 +115,7 @@ public class Road {
 
   /**
    * Returns the second intersection of this road.
-   * 
+   *
    * @return the second intersection of this road.
    */
   public Intersection getIntersection2() {
@@ -144,9 +136,9 @@ public class Road {
    *
    * <p>
    * This is intended for use in the Djikstra's algorithm.
-   * 
-   * @return {@code true} if this road is a shortest road in a shortest path,
-   * {@code false} otherwise.
+   *
+   * @return {@code true} if this road is a shortest road in a shortest path, {@code false}
+   *         otherwise.
    */
   public boolean getIsShortestRoad() {
     return this.isShortestRoad;
@@ -154,9 +146,9 @@ public class Road {
 
   /**
    * Marks or unmarks this road as the shortest road in a shortest path.
-   * 
-   * @param isShortestRoad {@code true} if this road is a shortest road in a
-   * shortest path, {@code false} if not.
+   *
+   * @param isShortestRoad {@code true} if this road is a shortest road in a shortest path,
+   *        {@code false} if not.
    */
   public void setIsShortestRoad(boolean isShortestRoad) {
     this.isShortestRoad = isShortestRoad;
@@ -164,10 +156,10 @@ public class Road {
 
   /**
    * Given an endpoint of this road, returns the other endpoint.
-   * 
+   *
    * @param intersection an endpoint of this road
-   * @return the other endpoint, or {@code null} if the given {@code Intersection}
-   * is not an endpoint of this road.
+   * @return the other endpoint, or {@code null} if the given {@code Intersection} is not an
+   *         endpoint of this road.
    */
   public Intersection getTheOtherEnd(Intersection intersection) {
     if (intersection.equals(this.intersection1)) {

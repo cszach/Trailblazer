@@ -18,20 +18,17 @@ import java.awt.event.KeyListener;
  * A {@code JPanel} whose graphics is draggable, zoomable, and rotatable.
  *
  * <p>
- * Listeners are implemented to listen to specific user's actions. In addition,
- * APIs are provided to simulate such actions. See the {@code drag},
- * {@code rotate}, {@code zoom} methods.
+ * Listeners are implemented to listen to specific user's actions. In addition, APIs are provided to
+ * simulate such actions. See the {@code drag}, {@code rotate}, {@code zoom} methods.
  *
  * <p>
- * To drag the graphics on this panel, press, hold, and drag the mouse. To zoom,
- * scroll the mouse wheel. To rotate, press and hold the Ctrl key while
- * pressing, holding, and dragging the mouse.
+ * To drag the graphics on this panel, press, hold, and drag the mouse. To zoom, scroll the mouse
+ * wheel. To rotate, press and hold the Ctrl key while pressing, holding, and dragging the mouse.
  *
  * <p>
- * When extending from this class, it is important to invoke this class's
- * constructor in the child class's constructor (i.e. {@code super()}), and
- * invoke this class's {@code paintComponent} in the child class's
- * {@code paintComponent} method.
+ * When extending from this class, it is important to invoke this class's constructor in the child
+ * class's constructor (i.e. {@code super()}), and invoke this class's {@code paintComponent} in the
+ * child class's {@code paintComponent} method.
  *
  * @author Zach
  * @version 0.1.0
@@ -40,7 +37,8 @@ import java.awt.event.KeyListener;
  * @see #rotate(double)
  * @see #zoom(double, double, double)
  */
-public abstract class TransformPanel extends JPanel implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
+public abstract class TransformPanel extends JPanel
+    implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
   /**
    * The current (net) amount of translation on the x-axis in double precision.
    */
@@ -58,8 +56,8 @@ public abstract class TransformPanel extends JPanel implements MouseListener, Mo
    */
   private double rotate = 0.0;
   /**
-   * The bounding box of the focused object of this panel; the center of scale
-   * and rotation is the center of the box.
+   * The bounding box of the focused object of this panel; the center of scale and rotation is the
+   * center of the box.
    */
   private Rectangle focus;
 
@@ -69,8 +67,7 @@ public abstract class TransformPanel extends JPanel implements MouseListener, Mo
   private boolean isRotating = false;
 
   /**
-   * Constructs a new {@code TransformPanel} with no focus and all the listeners
-   * added.
+   * Constructs a new {@code TransformPanel} with no focus and all the listeners added.
    */
   public TransformPanel() {
     super();
@@ -87,7 +84,7 @@ public abstract class TransformPanel extends JPanel implements MouseListener, Mo
 
   /**
    * Returns the bounding box of the focused object in this panel.
-   * 
+   *
    * @return the bounding box of the focused object in this panel.
    */
   public Rectangle getFocus() {
@@ -108,7 +105,7 @@ public abstract class TransformPanel extends JPanel implements MouseListener, Mo
    *
    * <p>
    * Input values' signs indicate direction according to Java Swing's rules.
-   * 
+   *
    * @param x the distance on the x-axis that is dragged
    * @param y the distance on the y-axis that is dragged
    */
@@ -121,7 +118,7 @@ public abstract class TransformPanel extends JPanel implements MouseListener, Mo
 
   /**
    * Simulates a rotate action.
-   * 
+   *
    * @param angle the angle of rotation, in radians
    */
   public void rotate(double angle) {
@@ -132,9 +129,9 @@ public abstract class TransformPanel extends JPanel implements MouseListener, Mo
 
   /**
    * Simulates a zoom action.
-   * 
-   * @param factor the factor of scale e.g. {@code factor} = 2 means double the
-   * current amount of zoom
+   *
+   * @param factor the factor of scale e.g. {@code factor} = 2 means double the current amount of
+   *        zoom
    * @param targetX the x coordinate of the center of scale
    * @param targetY the y coordinate of the center of scale
    */
@@ -156,12 +153,11 @@ public abstract class TransformPanel extends JPanel implements MouseListener, Mo
   }
 
   /**
-   * Centers the focused object on the panel while keeping the current rotation
-   * and zoom level.
+   * Centers the focused object on the panel while keeping the current rotation and zoom level.
    *
    * <p>
-   * Technically, centering is done such that the center of the bounding box
-   * will be on the center of this panel.
+   * Technically, centering is done such that the center of the bounding box will be on the center
+   * of this panel.
    */
   public void center() {
     double currentScale = this.scale;
@@ -228,8 +224,7 @@ public abstract class TransformPanel extends JPanel implements MouseListener, Mo
   }
 
   @Override
-  public void keyTyped(KeyEvent e) {
-  }
+  public void keyTyped(KeyEvent e) {}
 
   @Override
   public void keyPressed(KeyEvent e) {
@@ -246,12 +241,10 @@ public abstract class TransformPanel extends JPanel implements MouseListener, Mo
   }
 
   /**
-   * Draw graphics on this panel, with transforms from drag, zoom, and rotate
-   * actions applied.
+   * Draw graphics on this panel, with transforms from drag, zoom, and rotate actions applied.
    *
    * <p>
-   * For children classes: invoke {@code super.paintComponent(g)} for the
-   * transforms to take effect.
+   * For children classes: invoke {@code super.paintComponent(g)} for the transforms to take effect.
    */
   @Override
   public void paintComponent(Graphics g) {
@@ -261,6 +254,7 @@ public abstract class TransformPanel extends JPanel implements MouseListener, Mo
 
     g2d.translate(this.translateX, this.translateY);
     g2d.scale(this.scale, this.scale);
-    g2d.rotate(this.rotate, this.focus.getX() + this.focus.getWidth() / 2.0, this.focus.getY() + this.focus.getHeight() / 2.0);
+    g2d.rotate(this.rotate, this.focus.getX() + this.focus.getWidth() / 2.0,
+        this.focus.getY() + this.focus.getHeight() / 2.0);
   }
 }

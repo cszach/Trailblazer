@@ -10,10 +10,9 @@ public class TileProviders {
     switch (provider) {
       case 0:
         try {
-          return new URL(
-              String.format("https://tile.openstreetmap.org/%d/%d/%d.png", zoomLevel, tileX, tileY));
-        }
-        catch (MalformedURLException exception) {
+          return new URL(String.format("https://tile.openstreetmap.org/%d/%d/%d.png", zoomLevel,
+              tileX, tileY));
+        } catch (MalformedURLException exception) {
           return null;
         }
     }

@@ -1,3 +1,4 @@
 package io.github.cszach.Trailblazer.tiles;
 
-public class TileManager {}
+public class TileManager {
+}
