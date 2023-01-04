@@ -26,9 +26,9 @@ public class RasterTile extends BufferedImage implements Tile {
   private int zoomLevel;
 
   /**
-   * Constructs a new {@code RasterTile} with the specified location and zoom
-   * level from a specified {@code BufferedImage}.
-   * 
+   * Constructs a new {@code RasterTile} with the specified location and zoom level from a specified
+   * {@code BufferedImage}.
+   *
    * @param x the X coordinate of the upper-left corner of this tile on the map panel
    * @param y the Y coordinate of the upper-left corner of this tile on the map panel
    * @param zoomLevel the zoom level of the new tile
@@ -43,16 +43,15 @@ public class RasterTile extends BufferedImage implements Tile {
   }
 
   /**
-   * Constructs a new {@code RasterTile} with the specified zoom level and an
-   * initial location of (0, 0) from the specified {@code BufferedImage}.
-   * 
+   * Constructs a new {@code RasterTile} with the specified zoom level and an initial location of
+   * (0, 0) from the specified {@code BufferedImage}.
+   *
    * <p>
-   * The location can be set using {@code setX} and {@code setY} or
-   * {@code setLocation}.
-   * 
+   * The location can be set using {@code setX} and {@code setY} or {@code setLocation}.
+   *
    * @param zoomLevel the zoom level of the new tile
    * @param image the raster image of the new tile
-   * 
+   *
    * @see #setX(int)
    * @see #setY(int)
    * @see #setLocation(Point)

@@ -36,21 +36,21 @@ public interface Tile {
 
   /**
    * Sets the X coordinate of this tile.
-   * 
+   *
    * @param x the new X coordinate of the upper-left corner of this tile
    */
   public void setX(int x);
 
   /**
    * Sets the Y coordinate of this tile.
-   * 
+   *
    * @param y the new Y coordinate of the upper-left corner of this tile
    */
   public void setY(int y);
 
   /**
    * Sets the location of this tile.
-   * 
+   *
    * @param location the new {@code Point} that is the upper-left corner of this tile
    */
   public void setLocation(Point location);
