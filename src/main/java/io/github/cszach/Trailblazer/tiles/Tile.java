@@ -21,6 +21,20 @@ public interface Tile {
   public int getY();
 
   /**
+   * Returns the width of this tile.
+   * 
+   * @return the width of this tile.
+   */
+  public int getWidth();
+
+  /**
+   * Returns the height of this tile.
+   * 
+   * @return the height of this tile.
+   */
+  public int getHeight();
+
+  /**
    * Returns the location of this tile.
    *
    * @return the {@code Point} that is the upper-left corner of this tile.
