@@ -2,44 +2,56 @@ package io.github.cszach.Trailblazer.tiles;
 
 import java.awt.Point;
 
-public abstract class Tile {
+/**
+ * A tile interface.
+ */
+public interface Tile {
   /**
-   * The coordinate of the upper-left corner of this tile on the drawing context e.g. a
-   * {@code JPanel}.
+   * Returns the X coordinate of this tile.
+   *
+   * @return the X coordinate of the upper-left corner of this tile.
    */
-  private Point location;
-  /**
-   * The zoom level of this tile.
-   */
-  private int zoomLevel;
+  public int getX();
 
   /**
-   * Constructs a new tile with the given location and zoom level
+   * Returns the Y coordinate of this tile.
    *
-   * @param x the x coordinate of the upper corner of the tile
-   * @param y the y coordinate of the upper corner of the tile
-   * @param zoomLevel the zoom level of this tile
+   * @return the Y coordinate of the upper-left corner of this tile.
    */
-  public Tile(int x, int y, int zoomLevel) {
-    this.location = new Point(x, y);
-    this.zoomLevel = zoomLevel;
-  }
+  public int getY();
 
   /**
-   * Returns the coordinate of the upper-left corner of this tile.
+   * Returns the location of this tile.
    *
-   * @return the coordinate of the upper-left corner of this tile.
+   * @return the {@code Point} that is the upper-left corner of this tile.
    */
-  public Point getLocation() {
-    return this.location;
-  }
+  public Point getLocation();
 
   /**
    * Returns the zoom level of this tile.
    *
    * @return the zoom level of this tile.
    */
-  public int getZoomLevel() {
-    return this.zoomLevel;
-  }
+  public int getZoomLevel();
+
+  /**
+   * Sets the X coordinate of this tile.
+   * 
+   * @param x the new X coordinate of the upper-left corner of this tile
+   */
+  public void setX(int x);
+
+  /**
+   * Sets the Y coordinate of this tile.
+   * 
+   * @param y the new Y coordinate of the upper-left corner of this tile
+   */
+  public void setY(int y);
+
+  /**
+   * Sets the location of this tile.
+   * 
+   * @param location the new {@code Point} that is the upper-left corner of this tile
+   */
+  public void setLocation(Point location);
 }
