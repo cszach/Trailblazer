@@ -10,7 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class RasterTileBuilder {
-  private RasterTileProvider provider = RasterTileProvider.get(RasterTileProvider.OPENSTREETMAP);
+  private Optional<TileURLTemplate> urlTemplate;
   private Optional<Integer> tileX;
   private Optional<Integer> tileY;
   private Optional<Integer> zoomLevel;
@@ -18,6 +18,7 @@ public class RasterTileBuilder {
   private Optional<String> apiKey;
 
   public RasterTileBuilder() {
+    this.urlTemplate = Optional.empty();
     this.tileX = Optional.empty();
     this.tileY = Optional.empty();
     this.zoomLevel = Optional.empty();
@@ -25,8 +26,8 @@ public class RasterTileBuilder {
     this.apiKey = Optional.empty();
   }
 
-  public RasterTileProvider getProvider() {
-    return this.provider;
+  public Optional<TileURLTemplate> getURLTemplate() {
+    return this.urlTemplate;
   }
 
   public Optional<Integer> getTileX() {
@@ -49,12 +50,12 @@ public class RasterTileBuilder {
     return this.apiKey;
   }
 
-  public void setProvider(RasterTileProvider provider) {
-    if (provider == null) {
-      throw new IllegalArgumentException("Raster tile provider cannot be null");
+  public void setURLTemplate(TileURLTemplate urlTemplate) {
+    if (urlTemplate == null) {
+      throw new IllegalArgumentException("Tile URL template cannot be null");
     }
 
-    this.provider = provider;
+    this.urlTemplate = Optional.of(urlTemplate);
   }
 
   public void setTileX(int x) {
@@ -77,9 +78,38 @@ public class RasterTileBuilder {
     this.apiKey = Optional.of(apiKey);
   }
 
-  public Image getTile() {
-    if (!(this.tileX.isPresent() && this.tileY.isPresent() && this.zoomLevel.isPresent())) {
-      throw new Exception("");
+  public boolean isReadyToBuild() {
+    if (!(this.urlTemplate.isPresent() && this.tileX.isPresent() && this.tileY.isPresent()))
+      return false;
+    if (this.urlTemplate.get().requiresSubdomain() && !this.subdomain.isPresent())
+      return false;
+    if (this.urlTemplate.get().requiresApiKey() && !this.apiKey.isPresent())
+      return false;
+
+    return true;
+  }
+
+  /**
+   * Returns a tile URL given the builder's current configuration.
+   *
+   * <p>
+   * This method directly invokes
+   * {@link TileURLTemplate#getTileURL(int, int, int, Optional, Optional)}.
+   *
+   * @return the {@code URL} built by this builder with its current ingredients.
+   *
+   * @throws MalformedURLException if the URL created is invalid, which is likely because the URL
+   *         template does not have a protocol or has an invalid protocol;
+   * @throws BuilderException if the builder does not have enough ingredients to build a URL.
+   *
+   * @see TileURLTemplate#getTileURL(int, int, int, Optional, Optional)
+   */
+  public URL getTileURL() throws MalformedURLException, BuilderException {
+    if (this.isReadyToBuild()) {
+      return this.urlTemplate.get().getTileURL(this.tileX.get(), this.tileY.get(),
+          this.zoomLevel.get(), this.subdomain, this.apiKey);
+    } else {
+      throw new BuilderException("Builder is not ready to build");
     }
   }
 }
