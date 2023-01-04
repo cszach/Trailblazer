@@ -197,7 +197,7 @@ public class TileURLTemplate {
    *         received an empty {@code Optional} instance in the arguments;
    * @throws MalformedURLException when the result URL string contains an invalid protocol.
    */
-  public URL getTile(int tileX, int tileY, int zoomLevel, Optional<String> subdomain,
+  public URL getTileURL(int tileX, int tileY, int zoomLevel, Optional<String> subdomain,
       Optional<String> apiKey) throws IllegalArgumentException, MalformedURLException {
 
     if (this.requiresSubdomain && !subdomain.isPresent()) {
