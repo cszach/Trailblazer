@@ -4,11 +4,19 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 
 /**
- * A raster tile is a 256px x 256px {@code BufferedImage} that is a tile on a map and has a pair of
- * coordinates to determine the tile's location on the drawing (map) panel and a zoom level
- * associated with the tile.
+ * A raster tile is a {@code BufferedImage} that is a tile on a map and has a pair of coordinates to
+ * determine the tile's location on the drawing (map) panel and a zoom level associated with the
+ * tile.
  *
+ * <p>
+ * The tile's location is <i>before</i> any transform is applied to the panel's drawing context
+ * (e.g. because of mouse drags). For more information on the X and Y coordinates, see the external
+ * link in the <i>See also</i> section. Note that the information there corresponds to tiles that
+ * are 256 pixels in both width and height.
+ *
+ * @see <a href="https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#X_and_Y">X and Y</a>
  * @see Tile
+ * @see RasterTile
  * @see VectorTile
  */
 public class RasterTile extends BufferedImage implements Tile {

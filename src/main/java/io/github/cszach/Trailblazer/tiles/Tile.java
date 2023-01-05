@@ -22,14 +22,14 @@ public interface Tile {
 
   /**
    * Returns the width of this tile.
-   * 
+   *
    * @return the width of this tile.
    */
   public int getWidth();
 
   /**
    * Returns the height of this tile.
-   * 
+   *
    * @return the height of this tile.
    */
   public int getHeight();

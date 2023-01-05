@@ -3,11 +3,11 @@ package io.github.cszach.Trailblazer.tiles;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Optional;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
+// import java.awt.Image;
+// import java.awt.image.BufferedImage;
+// import java.io.IOException;
+//
+// import javax.imageio.ImageIO;
 
 public class RasterTileBuilder {
   private Optional<TileURLTemplate> urlTemplate;
